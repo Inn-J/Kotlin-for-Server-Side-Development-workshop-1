@@ -50,6 +50,29 @@ fun main() {
     println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500Sequence บาท")
     println("--------------------------------------------------")
 
+    val productunder1000 = products.groupBy { product -> product.price<1000.0 }
+    println("กลุ่มของสินค้าที่ราคาไม่เกิน 1000บาท")
+    productunder1000[true]?.forEach { product ->
+        println("- ${product.name} (${product.price} บาท)")
+    }
+    println("")
+
+    val product1000to9999 = products.groupBy { it.price in 1000.0..9999.0 }
+    println("กลุ่มของสินค้าที่ราคาอยู่ระหว่าง 1,000 - 9,999 บาท")
+    product1000to9999[true]?.forEach { product ->
+        println("- ${product.name} (${product.price} บาท)")
+    }
+    println("")
+
+
+    val productmorethan10000 = products.groupBy { product -> product.price>10000.0 }
+    println("กลุ่มของสินค้าราคา 10,000 ขึ้นไป")
+    productmorethan10000[true]?.forEach{ product ->
+            println("- ${product.name} (${product.price} บาท)")
+        }
+
+
+
 
     println("อภิปรายความแตกต่างระหว่าง List และ Sequence:")
     println("1. List Operations (วิธีที่ 1):")
