@@ -3,7 +3,18 @@ package org.example
 // 1. กำหนด data class สำหรับเก็บข้อมูลสินค้า
 data class Product(val name: String, val price: Double, val category: String)
 
-fun main() {
+fun calculateTotalElectronicsPriceOver500(products :List<Product>): Double {
+    return products
+        .filter { product -> product.price > 500.0 && product.category == "Electronics" }
+        .sumOf { it.price }
+}
+
+fun quantityofElectronicsPriceOver500(products :List<Product>): Int {
+    return products
+        .count { product -> product.price > 500.0 && product.category == "Electronics" }
+
+}
+            fun main() {
     // 2. สร้างรายการสินค้าตัวอย่าง (List<Product>)
     val products =listOf(Product("Laptop", 35000.0, category = "Electronics"),
         Product("Smartphone",25000.0,"Electronics"), Product("T-shirt",450.0,"Apparel"),
@@ -70,6 +81,9 @@ fun main() {
     productmorethan10000[true]?.forEach{ product ->
             println("- ${product.name} (${product.price} บาท)")
         }
+
+
+
 
 
 
