@@ -23,8 +23,20 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm:3.2.1")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-config-yaml:3.2.1")
-    testImplementation("io.ktor:ktor-server-test-host:3.2.1")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:3.2.1")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:3.2.1")
+
+    testImplementation("io.ktor:ktor-server-test-host:3.2.1")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
+    testImplementation(kotlin("test-junit5")) // ✅ ใช้ junit5
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
